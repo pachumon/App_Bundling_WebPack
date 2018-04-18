@@ -1,11 +1,12 @@
 var path = require("path");
 var webpack = require("webpack");
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')//this plugin helps to create the html files with the script chunks
 
 var basePath = __dirname;
 
 module.exports = {
     entry: {
+        vendor: ["jquery"],
         app: "./dist/bootstrapper.js"
     },
     output: {
@@ -24,5 +25,18 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+    plugins: [
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
+        new webpack.ProvidePlugin({
+            $: "jquery",
+            jQuery: "jquery"
+        }),
+        new HtmlWebpackPlugin({
+            filename: "index.html", //Name of file in ./dist
+            template: "index.html", //Name of template in ./src
+            favicon: "favicon.ico",
+            hash: true
+        })
+    ]
 };
