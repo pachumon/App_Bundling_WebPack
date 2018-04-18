@@ -1,6 +1,7 @@
 import { greeting } from "./greeter";
+import * as _ from "lodash";
 
-var message:string = greeting('pachu');
+var message: string = greeting('pachu');
 
 window.onload = function () {
     var html = document.getElementById('nativecontent');
@@ -8,5 +9,7 @@ window.onload = function () {
 };
 
 $(function () {
-   $('#jquerycontent').text('jquery content '+message);
+    $('#jquerycontent').text('jquery content ' + message);
+
+    _.map([4, 8], (n: number) => console.log(n * n));
 });
