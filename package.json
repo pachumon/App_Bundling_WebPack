@@ -10,7 +10,7 @@
     "build": "npm run clean:js && tsc",
     "build:source": "npm run build && webpack",
     "build:app": "npm run build:source && npm run view:app",
-    "build:dev":"npm run clean:folder && webpack-dev-server --open",
+    "build:dev": "npm run clean:folder && webpack-dev-server --open --port=6000 --hot",
     "test": "npm run clean:folder && webpack"
   },
   "keywords": [
@@ -27,13 +27,18 @@
     "babel-core": "^6.9.0",
     "babel-loader": "^6.2.4",
     "babel-preset-es2015": "^6.9.0",
+    "css-loader": "^0.28.11",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
     "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.21.0",
     "ts-loader": "^3.5.0",
     "typescript": "^2.8.1",
     "webpack": "^3.3.0",
     "webpack-dev-server": "^2.5.1"
   },
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5"
   }
