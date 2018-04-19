@@ -10,7 +10,8 @@
     "build": "npm run clean:js && tsc",
     "build:source": "npm run build && webpack",
     "build:app": "npm run build:source && npm run view:app",
-    "test": "webpack"
+    "build:dev":"npm run clean:folder && webpack-dev-server --open",
+    "test": "npm run clean:folder && webpack"
   },
   "keywords": [
     "typescript",
