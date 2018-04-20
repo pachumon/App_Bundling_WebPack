@@ -2,12 +2,13 @@ var path = require("path");
 var webpack = require("webpack");
 const HtmlWebpackPlugin = require('html-webpack-plugin')//this plugin helps to create the html files with the script chunks
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 var basePath = __dirname;
 
 module.exports = {
     entry: {
-        vendor: ["jquery", "bootstrap", "bootstrap/dist/css/bootstrap.css","font-awesome/css/font-awesome.css", "./src/style.css"],
+        vendor: ["jquery", "bootstrap", "bootstrap/dist/css/bootstrap.css", "font-awesome/css/font-awesome.css", "./src/style.css"],
         app: "./src/bootstrapper.ts"
     },
     output: {
@@ -48,7 +49,9 @@ module.exports = {
                 test: /\.css$/,
                 use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
                     fallback: 'style-loader',
-                    use: 'css-loader'
+                    use: [
+                        { loader: 'css-loader', options: { minimize: true } }
+                    ]
                 }))
             }
         ]
@@ -67,6 +70,18 @@ module.exports = {
             template: "index.html", //Name of template in ./src
             favicon: "favicon.ico",
             hash: true
+        }),
+        new UglifyJsPlugin({ //use this plugin to minify and mangle scripts for production grade build
+            uglifyOptions: {
+                minimize:true,
+                mangle: true,
+                output: {
+                    comments: false
+                }
+            },
+            sourceMap: true,
+            exclude: [/\.min\.js$/gi]
+            
         })
     ]
 };
