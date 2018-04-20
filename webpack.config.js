@@ -7,7 +7,7 @@ var basePath = __dirname;
 
 module.exports = {
     entry: {
-        vendor: ["jquery","bootstrap","bootstrap/dist/css/bootstrap.css","./src/style.css"],
+        vendor: ["jquery", "bootstrap", "bootstrap/dist/css/bootstrap.css", "./src/style.css"],
         app: "./src/bootstrapper.ts"
     },
     output: {
@@ -31,7 +31,12 @@ module.exports = {
             },
             {
                 test: /\.tsx?$/,
-                loader: "ts-loader"
+                use: {
+                    loader: "ts-loader",
+                    options: {
+                        transpileOnly: true //HMR doesn't work without this
+                    }
+                }
             },
             {
                 test: /\.woff2?$|\.ttf$|\.eot$|\.svg$/,
@@ -41,14 +46,15 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
+                use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
                     fallback: 'style-loader',
                     use: 'css-loader'
-                })
+                }))
             }
         ]
     },
     plugins: [
+        new webpack.NamedModulesPlugin(),
         new ExtractTextPlugin('styles.bundle.css'),
         new webpack.ProgressPlugin(),
         new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor.bundle.js' }),
