@@ -10,7 +10,7 @@
     "build": "npm run clean:js && tsc",
     "build:source": "npm run build && webpack",
     "build:app": "npm run build:source && npm run view:app",
-    "build:dev": "npm run clean:folder && webpack-dev-server --open --hot --inline",
+    "build:dev": "npm run clean:folder && webpack-dev-server --hot --inline",
     "test": "npm run clean:folder && webpack"
   },
   "keywords": [
@@ -41,6 +41,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.5"
   }

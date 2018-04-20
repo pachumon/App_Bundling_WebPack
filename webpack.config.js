@@ -7,7 +7,7 @@ var basePath = __dirname;
 
 module.exports = {
     entry: {
-        vendor: ["jquery", "bootstrap", "bootstrap/dist/css/bootstrap.css", "./src/style.css"],
+        vendor: ["jquery", "bootstrap", "bootstrap/dist/css/bootstrap.css","font-awesome/css/font-awesome.css", "./src/style.css"],
         app: "./src/bootstrapper.ts"
     },
     output: {
