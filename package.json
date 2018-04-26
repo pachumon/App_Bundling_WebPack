@@ -7,11 +7,12 @@
     "view:app": "live-server --open=./build --browser=chrome",
     "clean:folder": "del-cli dist build",
     "clean:js": "del-cli dist/**/*.js dist/**/*.map",
-    "build": "npm run clean:js && tsc",
-    "build:source": "npm run build && webpack",
-    "build:app": "npm run build:source && npm run view:app",
-    "build:dev": "npm run clean:folder && webpack-dev-server --hot --inline",
-    "test": "npm run clean:folder && webpack"
+    "build:tsc": "npm run clean:js && tsc",    
+    "build:app": "npm run build:prod && npm run view:app",
+    "build:devsvr": "npm run clean:folder && webpack-dev-server --hot --inline --env.env=dev",    
+    "build:prod":"npm run build -- --env.env=prod",    
+    "build:dev":"npm run build -- --env.env=dev",
+    "build": "npm run clean:folder && webpack"
   },
   "keywords": [
     "typescript",
@@ -38,7 +39,8 @@
     "typescript": "^2.8.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.3.0",
-    "webpack-dev-server": "^2.5.1"
+    "webpack-dev-server": "^2.5.1",
+    "webpack-merge": "^4.1.2"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
